@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ly Hor - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="./logo.png" alt="Ly Hor Logo" class="logo-img">
+                <span class="en">Ly Hor</span>
+                <span class="zh hidden">李河</span>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#home"><span class="en">Home</span><span class="zh hidden">首页</span></a></li>
+                <li><a href="#about"><span class="en">About</span><span class="zh hidden">关于我</span></a></li>
+                <li><a href="#skills"><span class="en">Skills</span><span class="zh hidden">技能</span></a></li>
+                <li><a href="#experience"><span class="en">Experience</span><span class="zh hidden">经验</span></a></li>
+                <li><a href="#projects"><span class="en">Projects</span><span class="zh hidden">项目</span></a></li>
+                <li><a href="#contact"><span class="en">Contact</span><span class="zh hidden">联系</span></a></li>
+            </ul>
+            <div class="controls">
+                <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="lang-toggle" id="langToggle">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>
+                    <span class="en">Ly Hor</span>
+                    <span class="zh hidden">李河</span>
+                </h1>
+                <div class="animated-text">
+    <span class="typing-text en"></span>
+    <span class="typing-text zh" style="display: none;"></span>
+</div>
+                
+                <p class="description">
+                    <span class="en">Passionate about transforming data into actionable insights through machine learning, web development, and data visualization.</span>
+                    <span class="zh hidden">热衷于通过机器学习、网络开发和数据可视化将数据转化为可操作的洞察。</span>
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="cta-button primary">
+                        <span class="en">Get In Touch</span>
+                        <span class="zh hidden">联系我</span>
+                    </a>
+                    <a href="resume.pdf" download="Ly_Hor_Resume.pdf" class="cta-button secondary">
+                        <span class="en">Download Resume</span>
+                        <span class="zh hidden">下载简历</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-photo">
+                <img src="./me.jpg" alt="Ly Hor">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="fade-in">
+            <span class="en">About Me</span>
+            <span class="zh hidden">关于我</span>
+        </h2>
+        <div class="about-content fade-in">
+            <div class="about-text">
+                <h3>
+                    <span class="en">Professional Background</span>
+                    <span class="zh hidden">专业背景</span>
+                </h3>
+                <p>
+                    <span class="en">I am a fourth-year Data Science and Engineering student at the Royal University of Phnom Penh, dedicated to solving real-world problems using data-driven approaches.</span>
+                    <span class="zh hidden">我是金边皇家大学数据科学与工程专业的四年级学生，致力于使用数据驱动方法解决现实世界的问题。</span>
+                </p>
+                <p>
+                    <span class="en">My experience spans machine learning, web development, and data visualization, with projects that deliver meaningful insights for decision-making.</span>
+                    <span class="zh hidden">我的经验涵盖机器学习、网络开发和数据可视化，通过项目提供决策所需的洞察。</span>
+                </p>
+                <div class="credentials">
+                    <div class="credential-item">
+                        <h4>
+                            <i class="fas fa-graduation-cap"></i>
+                            <span class="en">Education</span>
+                            <span class="zh hidden">教育</span>
+                        </h4>
+                        <p>
+                            <span class="en">Bachelor's in Data Science and Engineering, Royal University of Phnom Penh</span>
+                            <span class="zh hidden">数据科学与工程学士，金边皇家大学</span>
+                        </p>
+                    </div>
+                    <div class="credential-item clickable" id="certifications">
+                        <div class="credential-header">
+                            <h4>
+                                <i class="fas fa-certificate"></i>
+                                <span class="en">Certifications</span>
+                                <span class="zh hidden">认证</span>
+                            </h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="credential-content">
+                            <ul class="certificate-list">
+                                <li>
+                                    <button class="certificate-btn" data-cert="web-dev">
+                                        <span class="en">Udemy Web Development Bootcamp</span>
+                                        <span class="zh hidden">Udemy 网站开发课程</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="certificate-btn" data-cert="aws-ml">
+                                        <span class="en">AWS Machine Learning Foundation</span>
+                                        <span class="zh hidden">AWS 机器学习基础</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="certificate-btn" data-cert="ielts">
+                                        <span class="en">IELTS Preparation Course</span>
+                                        <span class="zh hidden">雅思备考课程</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="credential-item clickable" id="languages">
+                        <div class="credential-header">
+                            <h4>
+                                <i class="fas fa-globe"></i>
+                                <span class="en">Languages</span>
+                                <span class="zh hidden">语言</span>
+                            </h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="credential-content">
+                            <ul>
+                                <li>
+                                    <span class="en">Khmer (Native)</span><span class="zh hidden">高棉语（母语）</span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+                                </li>
+                                <li>
+                                    <span class="en">English (Advanced)</span><span class="zh hidden">英语（高级）</span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
+                                </li>
+                                <li>
+                                    <span class="en">Chinese (Intermediate)</span><span class="zh hidden">中文（中级）</span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 65%"></div></div>
+                                </li>
+                                <li>
+                                    <span class="en">Thai (Beginner)</span><span class="zh hidden">泰语（初级）</span>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 30%"></div></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2 class="fade-in">
+            <span class="en">Skills</span>
+            <span class="zh hidden">技能</span>
+        </h2>
+        <div class="skills-container fade-in">
+            <div class="skills-category">
+                <h3><span class="en">Frameworks & Libraries</span><span class="zh hidden">框架与库</span></h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><i class="fab fa-react"></i>React</div>
+                    <div class="skill-item"><i class="fab fa-node-js"></i>Node.js</div>
+                    <div class="skill-item"><i class="fas fa-server"></i>Express</div>
+                    <div class="skill-item"><i class="fab fa-bootstrap"></i>Bootstrap</div>
+                    <div class="skill-item"><i class="fas fa-leaf"></i>Spring Boot</div>
+                    <div class="skill-item"><i class="fab fa-angular"></i>Angular</div>
+                </div>
+            </div>
+            <div class="skills-category">
+                <h3><span class="en">Data Science Tools</span><span class="zh hidden">数据科学工具</span></h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><i class="fab fa-python"></i>Python</div>
+                    <div class="skill-item"><i class="fas fa-book"></i>Jupyter</div>
+                    <div class="skill-item"><i class="fas fa-table"></i>Pandas</div>
+                    <div class="skill-item"><i class="fas fa-calculator"></i>NumPy</div>
+                    <div class="skill-item"><i class="fas fa-brain"></i>Scikit-learn</div>
+                    <div class="skill-item"><i class="fas fa-chart-bar"></i>Power BI</div>
+                </div>
+            </div>
+            <div class="skills-category">
+                <h3><span class="en">Web Development</span><span class="zh hidden">网站开发</span></h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><i class="fab fa-js"></i>JavaScript</div>
+                    <div class="skill-item"><i class="fab fa-css3-alt"></i>CSS</div>
+                    <div class="skill-item"><i class="fab fa-html5"></i>HTML</div>
+                    <div class="skill-item"><i class="fas fa-database"></i>SQL</div>
+                    <div class="skill-item"><i class="fas fa-server"></i>PostgreSQL</div>
+                    <div class="skill-item"><i class="fab fa-git-alt"></i>Git</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <h2 class="fade-in">
+            <span class="en">Experience</span>
+            <span class="zh hidden">经验</span>
+        </h2>
+        <div class="experience-timeline fade-in">
+            <div class="experience-item">
+                <h3><span class="en">Chinese Translator</span><span class="zh hidden">中柬翻译者</span></h3>
+                <div class="company"><span class="en">Elite Max Construction</span><span class="zh hidden">Elite Max 建筑公司</span></div>
+                <div class="date">2020 - 2021</div>
+                <p><span class="en">Facilitated communication between Chinese managers and Khmer staff, improving workflow efficiency.</span><span class="zh hidden">帮助中国经理和高棉员工沟通，提升工作流程效率。</span></p>
+            </div>
+            <div class="experience-item">
+                <h3><span class="en">Office Assistant</span><span class="zh hidden">办公室助理</span></h3>
+                <div class="company"><span class="en">Construction Company</span><span class="zh hidden">中国建筑公司</span></div>
+                <div class="date">2021 - 2022</div>
+                <p><span class="en">Managed documents and created filing systems for efficient information access.</span><span class="zh hidden">管理文件并创建归档系统以高效访问信息。</span></p>
+            </div>
+            <div class="experience-item">
+                <h3><span class="en">Chinese Tutor</span><span class="zh hidden">中文家教</span></h3>
+                <div class="company"><span class="en">In-Home Tutoring</span><span class="zh hidden">上门家教</span></div>
+                <div class="date">2023 - Present</div>
+                <p><span class="en">Provided tailored one-on-one Chinese lessons for young students.</span><span class="zh hidden">为低龄学生提供一对一中文辅导。</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <h2 class="fade-in">
+            <span class="en">Projects</span>
+            <span class="zh hidden">项目</span>
+        </h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in" data-project="sales-prediction">
+                <h3><span class="en">Sales Prediction Model (RFM)</span><span class="zh hidden">销售预测模型</span></h3>
+                <p><span class="en">Customer segmentation using RFM analysis for predictive modeling.</span><span class="zh hidden">使用 RFM 分析进行客户细分和预测建模。</span></p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Scikit-learn</span>
+                    <span class="tech-tag">Pandas</span>
+                </div>
+                <a href="#" class="project-link"><span class="en">View Details</span><span class="zh hidden">查看详情</span></a>
+            </div>
+            <div class="project-card fade-in" data-project="money-laundering">
+                <h3><span class="en">Money Laundering Detection</span><span class="zh hidden">洗钱检测</span></h3>
+                <p><span class="en">Machine learning system for detecting suspicious financial transactions.</span><span class="zh hidden">检测可疑金融交易的机器学习系统。</span></p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Scikit-learn</span>
+                    <span class="tech-tag">Pandas</span>
+                </div>
+                <a href="#" class="project-link"><span class="en">View Details</span><span class="zh hidden">查看详情</span></a>
+            </div>
+            <div class="project-card fade-in" data-project="powerbi-dashboard">
+                <h3><span class="en">Power BI Sales Dashboard</span><span class="zh hidden">Power BI 销售仪表板</span></h3>
+                <p><span class="en">Interactive dashboard for sales analytics with dynamic KPIs.</span><span class="zh hidden">交互式销售分析仪表板，包含动态 KPI。</span></p>
+                <div class="project-tech">
+                    <span class="tech-tag">Power BI</span>
+                </div>
+                <a href="#" class="project-link"><span class="en">View Details</span><span class="zh hidden">查看详情</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="fade-in">
+            <span class="en">Contact</span>
+            <span class="zh hidden">联系</span>
+        </h2>
+        <div class="contact-content fade-in">
+            <p>
+                <span class="en">Open to new opportunities and collaborations. Reach out via:</span>
+                <span class="zh hidden">对新机会和合作持开放态度，通过以下方式联系我：</span>
+            </p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <a href="mailto:lyhordse@gmail.com">
+                        <i class="fas fa-envelope"></i>
+                        <span>lyhordse@gmail.com</span>
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <a href="https://t.me/layhor16899" target="_blank">
+                        <i class="fab fa-telegram-plane"></i>
+                        <span>@layhor16899</span>
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <a href="https://linkedin.com/in/lyhor" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                        <span>linkedin.com/in/lyhor</span>
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <a href="https://github.com/layhor" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <span>github.com/layhor</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <a href="#home" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+        <div class="footer-container">
+            <p>
+                <span class="en">&copy; 2025 Ly Hor. All Rights Reserved.</span>
+                <span class="zh hidden">&copy; 2025 李河。保留所有权利。</span>
+            </p>
+            <p>
+                <span class="en">Built with passion and precision.</span>
+                <span class="zh hidden">用热情和精准打造。</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
