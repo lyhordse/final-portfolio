@@ -18,8 +18,8 @@ body {
     --bg-secondary: #2D3748;
     --text-primary: #F1F5F9;
     --text-secondary: #94A3B8;
-    --accent-skills: #10B981;
-    --accent-skills-hover: #34D399;
+    --accent-skills: #80978f;
+    --accent-skills-hover: #928c59;
     --accent-contact: #D4AF37;
     --accent-contact-hover: #F4C430;
     --border-color: #4B5563;
@@ -212,6 +212,20 @@ nav.scrolled {
     color: var(--accent-contact);
 }
 
+@media (max-width: 768px) {
+    .cta-button.primary, .cta-button.secondary {
+        width: 80%; /* Full width on mobile for better touch targets */
+        margin: 15px auto; /* Increased margin for spacing */
+    }
+
+    /* Ensure "Download Resume" moves down further */
+    .download-btn {
+        margin-top: 20px; /* Additional top margin to push it down */
+    }
+}
+
+
+
 .cta-button:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
@@ -219,8 +233,8 @@ nav.scrolled {
 
 .hero-photo img {
     width: 320px;
-    border-radius: 50%;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-radius: 70%;
+    
     transition: transform 0.5s ease;
 }
 

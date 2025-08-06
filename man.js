@@ -1,3 +1,17 @@
+// Utility: Debounce function to limit event handler frequency
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Initialize all features on DOM content loaded
 document.addEventListener('DOMContentLoaded', () => {
     initThemeToggle();
     initLanguageToggle();
@@ -10,11 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initProjectLinks();
     initMobileMenu();
     initCertificateModals();
-    
-    
 });
 
-// Theme Toggle
+// Theme Toggle: Switch between light and dark themes
 function initThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
     if (!themeToggle) return;
@@ -36,22 +48,21 @@ function applyTheme(theme, icon) {
     icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 }
 
-
-
-// Language Toggle
+// Language Toggle: Switch between English and Chinese
 function initLanguageToggle() {
     const langToggle = document.getElementById('langToggle');
     if (!langToggle) return;
 
     let currentLang = localStorage.getItem('language') || 'en';
     toggleLanguage(currentLang);
+    langToggle.textContent = currentLang === 'en' ? 'EN' : '中';
 
     langToggle.addEventListener('click', () => {
         currentLang = currentLang === 'en' ? 'zh' : 'en';
         toggleLanguage(currentLang);
         langToggle.textContent = currentLang === 'en' ? 'EN' : '中';
         localStorage.setItem('language', currentLang);
-        initTypingAnimation(); // Restart typing animation for new language
+        initTypingAnimation();
     });
 }
 
@@ -65,68 +76,53 @@ function toggleLanguage(lang) {
     document.documentElement.lang = lang;
 }
 
-
-
-// Loading text
-// Loading text
-// Loading text
-let textIndex = 0;
-let charIndex = 0;
-const animatedText = document.querySelector('.animated-text');
-
+// Typing Animation: Cycle through roles with typing effect
 function initTypingAnimation() {
-    // Define language and target element
-    const lang = document.documentElement.lang || localStorage.getItem('language') || 'en';
-    console.log('Current language at init:', lang); // Debug: Log initial language
-
+    const lang = localStorage.getItem('language') || 'en';
     const typingText = document.querySelector(`.typing-text.${lang}`);
     if (!typingText) {
-        console.log('Typing text element not found for language:', lang, 'All typing-text elements:', document.querySelectorAll('.typing-text')); // Debug: Log all elements
+        console.warn(`Typing text element not found for language: ${lang}`);
         return;
     }
-    console.log('Using typing text element:', typingText); // Debug: Confirm element
 
-    const texts = lang === 'zh' ? ['数据分析师', '网页开发者'] : ['Data Analyst', 'Web Developer'];
+    const roles = {
+        en: ['Data Scientist', 'Web Developer', 'Data Analyst', 'Machine Learning Engineer', 'Data Visualizer'],
+        zh: ['数据科学家', '网络开发者', '数据分析师', '机器学习工程师', '数据可视化师']
+    };
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
     function type() {
-        if (charIndex < texts[textIndex].length) {
-            typingText.textContent += texts[textIndex].charAt(charIndex);
-            charIndex++;
-            console.log('Typing:', typingText.textContent); // Debug: Track typing progress
-            setTimeout(type, 300); // Slower typing speed: 300ms per character
+        const currentRole = roles[lang][roleIndex];
+        console.log(`Typing: ${currentRole}, charIndex: ${charIndex}, isDeleting: ${isDeleting}`); // Debug
+        if (!isDeleting) {
+            if (charIndex < currentRole.length) {
+                typingText.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(type, 100); // Typing speed
+            } else {
+                isDeleting = true;
+                setTimeout(type, 1000); // Pause before deleting
+            }
         } else {
-            console.log('Typing complete, pausing'); // Debug: Confirm pause
-            setTimeout(erase, 3000); // Longer pause: 3 seconds before erasing
+            if (charIndex > 0) {
+                typingText.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(type, 50); // Deleting speed
+            } else {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles[lang].length;
+                setTimeout(type, 500); // Pause before next role
+            }
         }
     }
 
-    function erase() {
-        if (charIndex >= 0) {
-            typingText.textContent = texts[textIndex].substring(0, charIndex);
-            charIndex--;
-            console.log('Erasing:', typingText.textContent); // Debug: Track erasing progress
-            setTimeout(erase, 150); // Slower erasing speed: 150ms per character
-        } else {
-            console.log('Erasing complete, moving to next text'); // Debug: Confirm cycle
-            textIndex = (textIndex + 1) % texts.length; // Loop through texts
-            charIndex = 0;
-            setTimeout(type, 1000); // Longer delay: 1 second before typing next text
-        }
-    }
-
-    // Reset and start the animation
-    console.log('Resetting animation for language:', lang); // Debug: Confirm reset
     typingText.textContent = '';
-    charIndex = 0;
     type();
 }
 
-// Restart animation when language changes (triggered by initLanguageToggle)
-document.addEventListener('languageChange', initTypingAnimation);
-
-
-
-// Smooth Scrolling
+// Smooth Scrolling: Scroll to anchor links smoothly
 function initSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
@@ -145,12 +141,13 @@ function initSmoothScrolling() {
     });
 }
 
-// Fade-In Animations
+// Fade-In Animations: Reveal elements on scroll
 function initFadeInAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Stop observing once visible
             }
         });
     }, { threshold: 0.2 });
@@ -158,9 +155,9 @@ function initFadeInAnimations() {
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 }
 
-// Active Navigation
+// Active Navigation: Highlight current section in nav
 function initActiveNavigation() {
-    const updateActiveNav = () => {
+    const updateActiveNav = debounce(() => {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-links a');
         let current = 'home';
@@ -177,13 +174,13 @@ function initActiveNavigation() {
                 link.classList.add('active');
             }
         });
-    };
+    }, 100);
 
     window.addEventListener('scroll', updateActiveNav);
     updateActiveNav();
 }
 
-// Dropdowns
+// Dropdowns: Toggle credential dropdowns
 function initDropdowns() {
     document.querySelectorAll('.credential-item.clickable').forEach(item => {
         item.querySelector('.credential-header').addEventListener('click', () => {
@@ -201,7 +198,7 @@ function initDropdowns() {
     });
 }
 
-// Back to Top
+// Back to Top: Show/hide back-to-top button
 function initBackToTop() {
     const backToTop = document.querySelector('.back-to-top');
     if (!backToTop) return;
@@ -211,48 +208,7 @@ function initBackToTop() {
     });
 }
 
-// Typing Animation
-const roles = {
-    en: ['Data Scientist', 'Web Developer', 'Data Analyst', 'Machine Learning Engineer'],
-    zh: ['数据科学家', '网络开发者', '数据分析师', '机器学习工程师']
-};
-
-function initTypingAnimation() {
-    const lang = localStorage.getItem('language') || 'en';
-    const typingText = document.querySelector(`.typing-text.${lang}`);
-    if (!typingText) return;
-
-    let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let currentText = '';
-
-    function type() {
-        const currentRole = roles[lang][roleIndex];
-        if (isDeleting) {
-            currentText = currentRole.substring(0, charIndex--);
-        } else {
-            currentText = currentRole.substring(0, charIndex++);
-        }
-
-        typingText.textContent = currentText;
-
-        if (!isDeleting && charIndex === currentRole.length + 1) {
-            isDeleting = true;
-            setTimeout(type, 1000);
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            roleIndex = (roleIndex + 1) % roles[lang].length;
-            setTimeout(type, 200);
-        } else {
-            setTimeout(type, isDeleting ? 50 : 100);
-        }
-    }
-
-    type();
-}
-
-// Certificate Modals
+// Certificate Modals: Display certificate details
 const certificatesData = {
     'web-dev': {
         title: { en: 'Udemy Web Development Bootcamp', zh: 'Udemy 网站开发课程' },
@@ -289,13 +245,14 @@ function initCertificateModals() {
 }
 
 function showCertificateModal(cert) {
+    closeCertificateModal();
     const lang = localStorage.getItem('language') || 'en';
     const modalHTML = `
-        <div class="certificate-modal-overlay" id="certificateModal">
+        <div class="certificate-modal-overlay" id="certificateModal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
             <div class="certificate-modal">
                 <div class="certificate-modal-header">
-                    <h3>${cert.title[lang]}</h3>
-                    <button class="modal-close"><i class="fas fa-times"></i></button>
+                    <h3 id="modalTitle">${cert.title[lang]}</h3>
+                    <button class="modal-close" aria-label="${lang === 'en' ? 'Close modal' : '关闭模态框'}"><i class="fas fa-times"></i></button>
                 </div>
                 <div class="certificate-modal-body">
                     <p><strong>${lang === 'en' ? 'Issuer' : '颁发机构'}:</strong> ${cert.issuer}</p>
@@ -317,7 +274,7 @@ function showCertificateModal(cert) {
     });
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeCertificateModal();
-    });
+    }, { once: true });
 }
 
 function closeCertificateModal() {
@@ -328,7 +285,7 @@ function closeCertificateModal() {
     }
 }
 
-// Project Links
+// Project Links: Display project details
 const projectsData = {
     'sales-prediction': {
         title: { en: 'Sales Prediction Model (RFM)', zh: '销售预测模型' },
@@ -372,24 +329,26 @@ function initProjectLinks() {
     document.querySelectorAll('.project-card').forEach(card => {
         const projectKey = card.dataset.project;
         const link = card.querySelector('.project-link');
-        
+        if (!projectsData[projectKey]) {
+            console.warn(`Project data not found for key: ${projectKey}`);
+            return;
+        }
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            if (projectsData[projectKey]) {
-                showProjectModal(projectsData[projectKey]);
-            }
+            showProjectModal(projectsData[projectKey]);
         });
     });
 }
 
 function showProjectModal(project) {
+    closeProjectModal();
     const lang = localStorage.getItem('language') || 'en';
     const modalHTML = `
-        <div class="project-modal-overlay" id="projectModal">
+        <div class="project-modal-overlay" id="projectModal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
             <div class="project-modal">
                 <div class="project-modal-header">
-                    <h3>${project.title[lang]}</h3>
-                    <button class="modal-close"><i class="fas fa-times"></i></button>
+                    <h3 id="modalTitle">${project.title[lang]}</h3>
+                    <button class="modal-close" aria-label="${lang === 'en' ? 'Close modal' : '关闭模态框'}"><i class="fas fa-times"></i></button>
                 </div>
                 <div class="project-modal-body">
                     <p>${project.description[lang]}</p>
@@ -420,7 +379,7 @@ function showProjectModal(project) {
     });
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeProjectModal();
-    });
+    }, { once: true });
 }
 
 function closeProjectModal() {
@@ -431,7 +390,7 @@ function closeProjectModal() {
     }
 }
 
-// Mobile Menu
+// Mobile Menu: Toggle navigation on mobile
 function initMobileMenu() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
