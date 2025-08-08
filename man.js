@@ -215,21 +215,21 @@ const certificatesData = {
         issuer: 'Udemy',
         date: '2023',
         description: { en: 'Comprehensive course covering HTML, CSS, JavaScript, and modern frameworks like React.', zh: '涵盖 HTML、CSS、JavaScript 和 React 等现代框架的综合课程。' },
-        link: 'https://www.udemy.com/certificate/web-development'
+        link: './udemy.pdf'
     },
     'aws-ml': {
         title: { en: 'AWS Machine Learning Foundation', zh: 'AWS 机器学习基础' },
         issuer: 'Amazon Web Services',
         date: '2023',
         description: { en: 'Foundational course on machine learning concepts and AWS tools for AI.', zh: '关于机器学习概念和 AWS AI 工具的基础课程。' },
-        link: 'https://aws.amazon.com/certification'
+        link: './aws.pdf'
     },
     'ielts': {
         title: { en: 'IELTS Preparation Course', zh: '雅思备考课程' },
         issuer: 'British Council',
         date: '2022',
         description: { en: 'Intensive preparation for the IELTS exam, focusing on academic English proficiency.', zh: '雅思考试的强化准备课程，专注于学术英语能力。' },
-        link: 'https://www.britishcouncil.org'
+        link: './ielts.pdf'
     }
 };
 
